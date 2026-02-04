@@ -1,6 +1,27 @@
+import subprocess
 from pathlib import Path
 
 from langchain_core.tools import tool
+
+BLOCKED = ["rm -rf", "rm -fr", "sudo ", "> /dev", "mkfs", "dd if=", ":(){", "chmod 777"]
+
+
+@tool
+def run_command(command: str) -> str:
+    """Run a shell command. Blocked: rm -rf, sudo, mkfs, dd, chmod 777."""
+    cmd = command.strip()
+    if any(b in cmd for b in BLOCKED):
+        return "Error: Command not allowed"
+    try:
+        result = subprocess.run(
+            cmd, shell=True, capture_output=True, text=True, timeout=30, cwd="."
+        )
+        out = result.stdout or result.stderr or ""
+        return out.strip() or f"Exit code: {result.returncode}"
+    except subprocess.TimeoutExpired:
+        return "Error: Command timed out"
+    except Exception as e:
+        return f"Error: {e}"
 
 
 @tool
@@ -52,4 +73,4 @@ def search_in_files(pattern: str, path: str = ".") -> str:
 
 
 def get_tools():
-    return [read_file, write_file, list_directory, search_in_files]
+    return [read_file, write_file, list_directory, search_in_files, run_command]

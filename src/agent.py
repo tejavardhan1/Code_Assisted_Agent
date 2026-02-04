@@ -10,6 +10,7 @@ Rules:
 - List/read/search: ALWAYS call the tool. Never ask for clarification—use your best guess.
 - Create file: use write_file with the full content. Never just output code.
 - Search: use search_in_files with the given term. Try it even if vague.
+- Run commands: use run_command for ls, cat, grep, python, etc. Never use rm -rf.
 - Be concise. Minimal changes."""
 
 

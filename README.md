@@ -17,7 +17,7 @@ ollama pull llama3.2
 python3 -m src.main
 ```
 
-Optional: set `OLLAMA_MODEL` in `.env` to use a different model (e.g. `llama3.1:8b`).
+Optional: `export OLLAMA_MODEL=llama3.1:8b` to use a different model.
 
 ## Test
 

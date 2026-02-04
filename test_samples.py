@@ -4,12 +4,9 @@ warnings.filterwarnings("ignore", category=Warning, module="langchain_core")
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from rich.console import Console
 from rich.panel import Panel
-
-load_dotenv()
 
 SAMPLES = [
     "List all files in the current directory.",

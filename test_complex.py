@@ -5,12 +5,9 @@ warnings.filterwarnings("ignore", category=Warning, module="langchain_core")
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
 from langchain_core.messages import HumanMessage
 from rich.console import Console
 from rich.panel import Panel
-
-load_dotenv()
 
 PROMPT = """Create examples/counter.py with a function count_lines(file_path: str) -> int that returns the number of lines in the file.
 Add a main block that calls count_lines('examples/sample.py') and prints the result.
